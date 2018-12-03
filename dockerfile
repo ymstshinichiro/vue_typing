@@ -9,7 +9,7 @@ RUN npm install -g vue-cli
 # RUN npm install -g express-generator@4.16.0
 
 # ディレクトリを移動する
-WORKDIR /myapp
+# WORKDIR /myapp
 
 # ポート3000番を開放する
 EXPOSE 3000

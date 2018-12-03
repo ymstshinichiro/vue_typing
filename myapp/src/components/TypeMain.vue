@@ -15,15 +15,15 @@
 
 <script>
     // axios を require してインスタンスを生成する
-    const axiosBase = require('axios');
-    const axios = axiosBase.create({
-        baseURL: 'http://localhost:3000/', 
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-        },
-        responseType: 'json'  
-    });
+    // const axiosBase = require('axios');
+    // const axios = axiosBase.create({
+    //     baseURL: 'http://localhost:3000/', 
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'X-Requested-With': 'XMLHttpRequest'
+    //     },
+    //     responseType: 'json'  
+    // });
 
     import { mapState, mapActions, mapGetters } from 'vuex'
 
@@ -43,7 +43,9 @@
                 return this.listanswer[this.lineCount]
             },
             answer(){
-                return this.listanswer[this.lineCount+1]
+                // return  this.$store.getters.gettypingData
+
+                return this.getData
             },
             judgeText(){
                 if (this.answer == this.inputText) {
@@ -55,23 +57,29 @@
             },
             ...mapGetters('stored', {
                 'showCounter': 'countWithSuffix',
+                'getData': 'gettypingData',
             })
         },
         methods: {
             // ここでvuexを使う準備をしている
-            ...mapActions('stored', { add: 'increment' })
+            // ...mapActions('stored', { add: 'increment' })
+            ...mapActions('stored', { 
+                'add': 'increment',
+                'getTypingsDataAction': 'getTypingsDataAction' })
         },
         created: function() {
             this.listanswer = this.source.split(/\r\n|\r|\n/)
             console.log(this.listanswer)
             //this.$store.dispatch('clear')
 
-            axios.get('/typings').then(response => {
-                //console.log(response.data);
-                this.datafromAPI = response.data
-            }).catch(function(error) {
-                console.log('ERROR!! occurred in Backend.')
-            });
+            // axios.get('/typings?id=1').then(response => {
+            //     this.datafromAPI = response.data
+            // }).catch(function(error) {
+            //     console.log('ERROR!! occurred in Backend.')
+            // });
+
+            this.getTypingsDataAction();
+
         },
         components: {
             // HeadComp,
