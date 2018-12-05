@@ -14,8 +14,8 @@ const stored = {
     countWithSuffix(state) {
       return `${state.count} 回`
     },
-    gettypingData: (state, getters) => () => {
-      return this.state.typingData.answer;
+    gettypingData(state, getters){
+      return state.typingData;
     },
   },
   mutations: {
@@ -30,8 +30,8 @@ const stored = {
     increment(context) {
       context.commit('increment')
     },
-    getTypingsDataAction({ commit }) {
-      axios.get('http://localhost:3000/typings?=1')
+    getTypingsDataAction({ commit }, id ) {
+      axios.get('http://localhost:3000/typings?id='+`${id}`)
         .then((res) => {
           commit('getTypingsData', res);
         });
