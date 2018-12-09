@@ -20,6 +20,22 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      author: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      language: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      version: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      rank: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       created_at: {
         allowNull: true,
         type: Sequelize.DATE
